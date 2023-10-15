@@ -1,4 +1,4 @@
-package Domen;
+package domen;
 
 public abstract class User {
     protected String username;

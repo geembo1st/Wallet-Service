@@ -1,9 +1,7 @@
-package Infrastructure;
+package infrastructure;
 
-import Infrastructure.AuditService;
-import Domen.Player;
-import Infrastructure.PlayerRepository;
-import Infrastructure.TransactionService;
+import domen.Player;
+
 import java.util.Scanner;
 
 /**
@@ -35,7 +33,7 @@ public class TransactionServiceApp implements TransactionService {
      * @param transactionId the transaction id
      * @throws Exception the exception
      */
-    public void debit(Player player, long amount, String transactionId) throws Exception {
+    public void debit(Player player, long amount, String transactionId) {
         if(player.getBalance() >= 0 && player.getBalance()>=amount) {
             System.out.println("Введите номер транзакции ");
             String transaction = scanner.nextLine();  //toDo подумать насчет уникальности transactionId
@@ -47,12 +45,12 @@ public class TransactionServiceApp implements TransactionService {
             } else {
                 boolean success2 = false;
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,success2);
-                throw new Exception("Номер транзакции сужествует");
+                throw new RuntimeException("Номер транзакции сужествует");
             }
         } else {
             boolean success3 = false;
             auditService.logAction(player.getUsername()," transaction: " + transactionId,success3);
-            throw new Exception("Транзакция не может быть произведена");
+            throw new RuntimeException("Транзакция не может быть произведена");
         }
     }
     /**
@@ -63,7 +61,7 @@ public class TransactionServiceApp implements TransactionService {
      * @param transactionId the transaction id
      * @throws Exception the exception
      */
-    public void credit(Player player, long amount, String transactionId) throws Exception {
+    public void credit(Player player, long amount, String transactionId) {
         if(player.getBalance() >= 0 && player.getBalance()>=amount) {
             System.out.println("Введите номер транзакции ");
             String transaction = scanner.nextLine(); //toDo подумать насчет уникальности transactionId
@@ -74,12 +72,12 @@ public class TransactionServiceApp implements TransactionService {
             } else {
                 boolean success2 = false;
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,success2);
-                throw new Exception("Номер транзакции сужествует");
+                throw new RuntimeException("Номер транзакции сужествует");
             }
         } else {
             boolean success3 = false;
             auditService.logAction(player.getUsername()," транзакция: " + transactionId,success3);
-            throw new Exception("Транзакция не может быть произведена");
+            throw new RuntimeException("Транзакция не может быть произведена");
         }
     }
 }

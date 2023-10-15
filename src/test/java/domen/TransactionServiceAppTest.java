@@ -1,6 +1,7 @@
-package Domen;
+package domen;
 
-import Infrastructure.TransactionService;
+import infrastructure.TransactionService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,8 @@ public class TransactionServiceAppTest {
     @Mock
     private TransactionService transactionService;
     @Test
-     void debit_Should_Return_True() throws Exception {
+    @DisplayName("debit_Should_Return_True")
+     void debitShouldReturnTrue() throws Exception {
         Player player = new Player("remy@gmail.com", "123".toCharArray());
         player.setBalance(200);
         String transactionId = "111";

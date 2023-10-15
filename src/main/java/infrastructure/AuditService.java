@@ -1,4 +1,4 @@
-package Infrastructure;
+package infrastructure;
 
 /**
  * The interface Audit service.

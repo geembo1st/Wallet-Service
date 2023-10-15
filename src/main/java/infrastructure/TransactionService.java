@@ -1,7 +1,7 @@
-package Infrastructure;
+package infrastructure;
 
 
-import Domen.Player;
+import domen.Player;
 
 /**
  * The interface Transaction service.
@@ -15,7 +15,7 @@ public interface TransactionService {
      * @param transactionId the transaction id
      * @throws Exception the exception
      */
-    void debit(Player player, long amount, String transactionId) throws Exception;
+    void debit(Player player, long amount, String transactionId);
 
     /**
      * Credit.
@@ -25,5 +25,5 @@ public interface TransactionService {
      * @param transactionId the transaction id
      * @throws Exception the exception
      */
-    void credit(Player player, long amount, String transactionId) throws Exception;
+    void credit(Player player, long amount, String transactionId);
 }

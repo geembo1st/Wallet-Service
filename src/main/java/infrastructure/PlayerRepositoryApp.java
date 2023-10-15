@@ -1,6 +1,7 @@
-package Infrastructure;
+package infrastructure;
 
-import Domen.*;
+import domen.*;
+import exception.RegisterException;
 
 import java.util.*;
 
@@ -18,10 +19,10 @@ public class PlayerRepositoryApp implements PlayerRepository {
         this.auditService = auditService;
     }
 
-    public void registerPlayer(User user) throws Exception {
+    public void registerPlayer(User user)  {
         if (playerMap.containsKey(user.getUsername())) {
             auditService.logAction(user.getUsername()," регистрация ", false);
-            throw new Exception("Пользователь с таким логином уже существует");
+            throw new RegisterException();
         }
         auditService.logAction(user.getUsername()," регистрация ", true);
         this.playerMap.put(user.getUsername(), user);

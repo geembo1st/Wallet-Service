@@ -1,4 +1,4 @@
-package Domen;
+package domen;
 
 /**
  * The type Admin.
@@ -10,11 +10,7 @@ public class Admin extends User {
         this.isAdmin = true;
     }
 
-    /**
-     * Gets username.
-     *
-     * @return the username
-     */
+
     public String getUsername() {
         return username;
     }

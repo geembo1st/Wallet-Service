@@ -1,7 +1,7 @@
-package Infrastructure;
+package infrastructure;
 
-import Domen.Admin;
-import Domen.User;
+import domen.Admin;
+import domen.User;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,7 +34,7 @@ public class AdminAction implements Action {
      *
      * @throws Exception the exception
      */
-    public void action() throws Exception {
+    public void action(){
         System.out.println("Выберите действие: " + "\n" + "1)Аудит действий игрока " + "\n" + "2)Посмотреть всех игроков");
         int action = scanner.nextInt();
         switch (action) {
@@ -46,7 +46,7 @@ public class AdminAction implements Action {
                 System.out.println(playerList.toString());
                 break;
             default:
-                throw new Exception("Вы ввели неверное значение");
+                throw new RuntimeException("Вы ввели неверное значение");
         }
     }
 }

@@ -1,6 +1,6 @@
-package Infrastructure;
+package infrastructure;
 
-import Domen.Player;
+import domen.Player;
 
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class PlayerAction implements Action {
      *
      * @throws Exception the exception
      */
-    public void action() throws Exception {
+    public void action()  {
         System.out.println("Выберите действие: " + "\n" + "1)Дебет/снятие средств" + "\n" + "2)Кредит" + "\n"
                 + "3)Просмотр истории пополнения/снятия средств" + "\n" + "4)Узнать баланс");
         int action = scanner.nextInt();
@@ -52,7 +52,7 @@ public class PlayerAction implements Action {
                 System.out.println(balance);
                 break;
             default:
-                throw new Exception("Вы ввели не то значение");
+                throw new RuntimeException("Вы ввели не то значение");
         }
     }
 }

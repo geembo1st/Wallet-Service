@@ -1,7 +1,6 @@
-package Infrastructure;
+package infrastructure;
 
-import Domen.Player;
-import Domen.User;
+import domen.User;
 
 import java.util.List;
 
