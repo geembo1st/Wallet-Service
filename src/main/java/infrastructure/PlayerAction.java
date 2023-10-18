@@ -1,16 +1,10 @@
 package infrastructure;
 
 import domen.Player;
-
+import exception.IncorrectValueException;
 import java.util.Scanner;
 
-/**
- * The type User action.
- */
 public class PlayerAction implements Action {
-    /**
-     * The Scanner.
-     */
     Scanner scanner = new Scanner(System.in);
     private TransactionService transactionService;
     private Player player;
@@ -20,11 +14,6 @@ public class PlayerAction implements Action {
         this.transactionService = transactionService;
     }
 
-    /**
-     * Action.
-     *
-     * @throws Exception the exception
-     */
     public void action()  {
         System.out.println("Выберите действие: " + "\n" + "1)Дебет/снятие средств" + "\n" + "2)Кредит" + "\n"
                 + "3)Просмотр истории пополнения/снятия средств" + "\n" + "4)Узнать баланс");
@@ -35,6 +24,7 @@ public class PlayerAction implements Action {
                 int amountDebit = scanner.nextInt();
                 System.out.println("Введите id транзакции");
                 String transactionIdDebit = scanner.nextLine();
+                scanner.nextLine();
                 transactionService.debit(player, amountDebit, transactionIdDebit);
                 break;
             case (2):
@@ -42,6 +32,7 @@ public class PlayerAction implements Action {
                 int amountCredit = scanner.nextInt();
                 System.out.println("Введите id транзакции");
                 String transactionIdCredit = scanner.nextLine();
+                scanner.nextLine();
                 transactionService.credit(player, amountCredit, transactionIdCredit);
                 break;
             case (3):
@@ -52,7 +43,7 @@ public class PlayerAction implements Action {
                 System.out.println(balance);
                 break;
             default:
-                throw new RuntimeException("Вы ввели не то значение");
+                throw new IncorrectValueException();
         }
     }
 }

@@ -1,6 +1,8 @@
 package infrastructure;
 
-import domen.*;
+import domen.Admin;
+import domen.User;
+import exception.AuthenticateException;
 import exception.RegisterException;
 
 import java.util.*;
@@ -23,26 +25,23 @@ public class PlayerRepositoryApp implements PlayerRepository {
         if (playerMap.containsKey(user.getUsername())) {
             auditService.logAction(user.getUsername()," регистрация ", false);
             throw new RegisterException();
+        } else {
+            auditService.logAction(user.getUsername(), " регистрация ", true);
+            this.playerMap.put(user.getUsername(), user);
+            System.out.println("Регистрация прошла успешно");
         }
-        auditService.logAction(user.getUsername()," регистрация ", true);
-        this.playerMap.put(user.getUsername(), user);
-        System.out.println("Регистрация прошла успешно");
     }
 
-    public User authenticatePlayer(String userName, char [] password) throws Exception {
-        System.out.print("Введите логин: ");
-        String authenticateUsername = scanner.nextLine();
-        System.out.print("Введите пароль: ");
-        String authenticateUserPassword = scanner.nextLine();
-        User user = playerMap.get(authenticateUsername);
-        if (user != null && String.valueOf(user.getPassword()).equals(authenticateUserPassword) &&
-                authenticateUsername.equals(user.getUsername())) {
-            System.out.println("Аутентификация пользователя прошла успешно: " + authenticateUsername);
+    public User authenticatePlayer(String userName, char [] password) {
+        User user = playerMap.get(userName);
+        if (user != null && String.valueOf(user.getPassword()).equals(String.valueOf(password)) &&
+                userName.equals(user.getUsername())) {
+            System.out.println("Аутентификация пользователя прошла успешно: " + userName);
             auditService.logAction(user.getUsername()," аутентификация ", true);
             return user;
         } else {
-            auditService.logAction(authenticateUsername," аутентификация ", false);
-            throw new Exception("Аутентификация не удалась для пользователя: " + authenticateUsername);
+            auditService.logAction(userName," аутентификация ", false);
+            throw new AuthenticateException();
         }
     }
 

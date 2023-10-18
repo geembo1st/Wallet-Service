@@ -92,12 +92,12 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../Domen/TransactionService.html" title="interface in domen">TransactionService</a></code></dd>
+<dd><code><a href="../Domen/TransactionService.html" title="interface in infrastructureTest">TransactionService</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TransactionServiceApp</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../Domen/TransactionService.html" title="interface in domen">TransactionService</a></span></div>
+implements <a href="../Domen/TransactionService.html" title="interface in infrastructureTest">TransactionService</a></span></div>
 <div class="block">The type Transaction service app.</div>
 </section>
 <section class="summary">
@@ -110,8 +110,8 @@ implements <a href="../Domen/TransactionService.html" title="interface in domen"
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(Infrastructure.PlayerRepository,Domen.AuditService)" class="member-name-link">TransactionServiceApp</a><wbr>(<a href="../Domen/PlayerRepository.html" title="interface in domen">PlayerRepository</a>&nbsp;playerRepository,
- <a href="../Domen/AuditService.html" title="interface in domen">AuditService</a>&nbsp;auditService)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(Infrastructure.PlayerRepository,Domen.AuditService)" class="member-name-link">TransactionServiceApp</a><wbr>(<a href="../Domen/PlayerRepository.html" title="interface in infrastructureTest">PlayerRepository</a>&nbsp;playerRepository,
+ <a href="../Domen/AuditService.html" title="interface in infrastructureTest">AuditService</a>&nbsp;auditService)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Instantiates a new Transaction service app.</div>
 </div>
@@ -130,14 +130,14 @@ implements <a href="../Domen/TransactionService.html" title="interface in domen"
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#credit(Domen.Player,long,java.lang.String)" class="member-name-link">credit</a><wbr>(<a href="../Domen/Player.html" title="class in domen">Player</a>&nbsp;player,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#credit(Domen.Player,long,java.lang.String)" class="member-name-link">credit</a><wbr>(<a href="../Domen/Player.html" title="class in infrastructureTest">Player</a>&nbsp;player,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Credit.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debit(Domen.Player,long,java.lang.String)" class="member-name-link">debit</a><wbr>(<a href="../Domen/Player.html" title="class in domen">Player</a>&nbsp;player,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debit(Domen.Player,long,java.lang.String)" class="member-name-link">debit</a><wbr>(<a href="../Domen/Player.html" title="class in infrastructureTest">Player</a>&nbsp;player,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -163,8 +163,8 @@ implements <a href="../Domen/TransactionService.html" title="interface in domen"
 <li>
 <section class="detail" id="&lt;init&gt;(Infrastructure.PlayerRepository,Domen.AuditService)">
 <h3>TransactionServiceApp</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TransactionServiceApp</span><wbr><span class="parameters">(<a href="../Domen/PlayerRepository.html" title="interface in domen">PlayerRepository</a>&nbsp;playerRepository,
- <a href="../Domen/AuditService.html" title="interface in domen">AuditService</a>&nbsp;auditService)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TransactionServiceApp</span><wbr><span class="parameters">(<a href="../Domen/PlayerRepository.html" title="interface in infrastructureTest">PlayerRepository</a>&nbsp;playerRepository,
+ <a href="../Domen/AuditService.html" title="interface in infrastructureTest">AuditService</a>&nbsp;auditService)</span></div>
 <div class="block">Instantiates a new Transaction service app.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -184,14 +184,14 @@ implements <a href="../Domen/TransactionService.html" title="interface in domen"
 <li>
 <section class="detail" id="debit(Domen.Player,long,java.lang.String)">
 <h3>debit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debit</span><wbr><span class="parameters">(<a href="../Domen/Player.html" title="class in domen">Player</a>&nbsp;player,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debit</span><wbr><span class="parameters">(<a href="../Domen/Player.html" title="class in infrastructureTest">Player</a>&nbsp;player,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionId)</span>
            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Debit.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Domen/TransactionService.html#debit(Domen.Player,long,java.lang.String)">debit</a></code>&nbsp;in interface&nbsp;<code><a href="../Domen/TransactionService.html" title="interface in domen">TransactionService</a></code></dd>
+<dd><code><a href="../Domen/TransactionService.html#debit(Domen.Player,long,java.lang.String)">debit</a></code>&nbsp;in interface&nbsp;<code><a href="../Domen/TransactionService.html" title="interface in infrastructureTest">TransactionService</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>player</code> - the player</dd>
 <dd><code>amount</code> - the amount</dd>
@@ -204,14 +204,14 @@ implements <a href="../Domen/TransactionService.html" title="interface in domen"
 <li>
 <section class="detail" id="credit(Domen.Player,long,java.lang.String)">
 <h3>credit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">credit</span><wbr><span class="parameters">(<a href="../Domen/Player.html" title="class in domen">Player</a>&nbsp;player,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">credit</span><wbr><span class="parameters">(<a href="../Domen/Player.html" title="class in infrastructureTest">Player</a>&nbsp;player,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionId)</span>
             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Credit.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Domen/TransactionService.html#credit(Domen.Player,long,java.lang.String)">credit</a></code>&nbsp;in interface&nbsp;<code><a href="../Domen/TransactionService.html" title="interface in domen">TransactionService</a></code></dd>
+<dd><code><a href="../Domen/TransactionService.html#credit(Domen.Player,long,java.lang.String)">credit</a></code>&nbsp;in interface&nbsp;<code><a href="../Domen/TransactionService.html" title="interface in infrastructureTest">TransactionService</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>player</code> - the player</dd>
 <dd><code>amount</code> - the amount</dd>

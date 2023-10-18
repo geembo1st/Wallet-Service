@@ -1,15 +1,11 @@
 package domen;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Player.
- */
 public class Player extends User {
     private long balance;
-    private List<String> transactionHistory;
-
-
+    private List<String> transactionHistory = new ArrayList<>();
     public Player(String username, char [] password) {
         this.username = username;
         this.password = password;

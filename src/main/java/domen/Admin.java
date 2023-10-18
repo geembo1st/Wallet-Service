@@ -11,7 +11,8 @@ public class Admin extends User {
     }
 
 
+    @Override
     public String getUsername() {
-        return username;
+        return super.getUsername();
     }
 }
