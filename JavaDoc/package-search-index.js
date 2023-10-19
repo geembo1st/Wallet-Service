@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Application"},{"l":"Domen"},{"l":"Infrastructure"},{"l":"org.example"}];updateSearchResults();
