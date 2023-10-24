@@ -2,16 +2,9 @@ package infrastructure;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Audit service app.
- */
 public class AuditServiceApp implements AuditService {
     private List<String> auditLog;
 
-    /**
-     * Instantiates a new Audit service app.
-     */
     public AuditServiceApp() {
         this.auditLog = new ArrayList<>();
     }
@@ -20,10 +13,6 @@ public class AuditServiceApp implements AuditService {
         String logEntry = username + " - " + action + " - " + (success ? "SUCCESS" : "FAIL");
         auditLog.add(logEntry);
     }
-
-    /**
-     * Gets audit log.
-     */
     public void getAuditLog() {
         System.out.println("Audit Log:");
         for (String entry : auditLog) {
