@@ -60,7 +60,6 @@ public class Main {
                     break;
                 default:
                     System.out.println("Неверное значение, введите еще раз");
-                    //toDo как сделать чтобы не только при цифрах но и буквах
             }
         } while (action != 4);
     }

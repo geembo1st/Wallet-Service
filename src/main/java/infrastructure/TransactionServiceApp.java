@@ -8,11 +8,11 @@ public class TransactionServiceApp implements TransactionService {
         this.playerRepository=playerRepository;
         this.auditService=auditService;
     }
-    public boolean debit(Player player, long amount, String transactionId) {
+    public boolean debit(Player player, int amount, String transactionId) {
         if(player.getBalance()>=amount) {
-            if(!player.getTransactionHistory().contains(transactionId)){
+            if(!player.getTransactionHistory().containsKey(transactionId)){
                 player.setBalance(player.getBalance()-amount);
-                player.addTransactionToHistory(transactionId);
+                player.addTransactionToHistory(transactionId,amount);
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
             } else {
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
@@ -24,11 +24,11 @@ public class TransactionServiceApp implements TransactionService {
         }
         return true;
     }
-    public boolean credit(Player player, long amount, String transactionId) {
+    public boolean credit(Player player, int amount, String transactionId) {
         if(amount >0) {
-            if(!player.getTransactionHistory().contains(transactionId)){
+            if(!player.getTransactionHistory().containsKey(transactionId)){
                 player.setBalance(player.getBalance()+amount);
-                player.addTransactionToHistory(transactionId);
+                player.addTransactionToHistory(transactionId,amount);
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
             } else {
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);

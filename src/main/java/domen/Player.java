@@ -1,9 +1,12 @@
 package domen;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 public class Player extends User {
     private long balance;
-    private List<String> transactionHistory = new ArrayList<>();
+ //   private List<String> transactionHistory = new ArrayList<>();
+    private HashMap<String,Integer> transactionHistory = new HashMap<>();
+
     public Player(String username, char [] password) {
         this.username = username;
         this.password = password;
@@ -15,13 +18,13 @@ public class Player extends User {
     public void setBalance(long balance) {
         this.balance = balance;
     }
-    public void addTransactionToHistory(String transactionId) {
-        transactionHistory.add(transactionId);
+    public void addTransactionToHistory(String transactionId,Integer amount) {
+        transactionHistory.put(transactionId,amount);
     }
     public String getUsername() {
         return username;
     }
-    public List<String> getTransactionHistory() {
+    public HashMap<String,Integer> getTransactionHistory() {
         return transactionHistory;
     }
     public char[] getPassword() {

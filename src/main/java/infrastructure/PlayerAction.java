@@ -36,7 +36,7 @@ public class PlayerAction implements Action {
                     }
                     break;
                 case (3):
-                    player.getTransactionHistory().forEach(transaction -> System.out.println("Transaction: " + transaction));
+                    player.getTransactionHistory().forEach((transactionID, amount) -> System.out.println("Transaction: " + transactionID + "\n amount: " + amount));
                     break;
                 case (4):
                     long balance = player.getBalance();
