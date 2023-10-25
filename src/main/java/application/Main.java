@@ -15,8 +15,7 @@ public class Main {
         int action;
         do {
             System.out.println("\nВыберите действие:\n\t1)регистрация\n\t2)вход\n\t3)зайти под администратором\n\t4) Выйти");
-            action = scanner.nextInt();
-            scanner.nextLine();
+            action = Integer.parseInt(scanner.nextLine());
             switch (action) {
                 case(1):
                     System.out.println("Придумайте логин:");
