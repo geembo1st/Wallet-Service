@@ -1,10 +1,8 @@
 package infrastructure;
-
 import java.util.ArrayList;
 import java.util.List;
 public class AuditServiceApp implements AuditService {
     private List<String> auditLog;
-
     public AuditServiceApp() {
         this.auditLog = new ArrayList<>();
     }

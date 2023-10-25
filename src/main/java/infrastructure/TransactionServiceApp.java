@@ -1,6 +1,7 @@
 package infrastructure;
 import domen.Player;
 import exception.TransactionException;
+import lombok.EqualsAndHashCode;
 public class TransactionServiceApp implements TransactionService {
     private PlayerRepository playerRepository;
     private AuditService auditService;

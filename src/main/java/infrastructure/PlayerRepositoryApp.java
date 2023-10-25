@@ -1,13 +1,10 @@
 package infrastructure;
-
 import domen.Admin;
 import domen.User;
 import exception.AuthenticateException;
 import exception.RegisterException;
 
 import java.util.*;
-
-
 public class PlayerRepositoryApp implements PlayerRepository {
     Scanner scanner = new Scanner(System.in);
     private Admin admin;
@@ -48,5 +45,4 @@ public class PlayerRepositoryApp implements PlayerRepository {
     public List<User> getPlayers() {
                 return new ArrayList<>(playerMap.values());
     }
-
 }

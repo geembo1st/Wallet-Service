@@ -1,6 +1,5 @@
 package infrastructure;
 import domen.Player;
-
 import java.util.Scanner;
 public class PlayerAction implements Action {
     Scanner scanner = new Scanner(System.in);
