@@ -10,7 +10,7 @@ public class TransactionServiceApp implements TransactionService {
     }
     public boolean debit(Player player, long amount, String transactionId) {
         if(player.getBalance()>=amount) {
-            if(!player.getTransactionHistory().contains(transactionId)){  //toDo тупит при вводе номера транзакции
+            if(!player.getTransactionHistory().contains(transactionId)){
                 player.setBalance(player.getBalance()-amount);
                 player.addTransactionToHistory(transactionId);
                 auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
@@ -20,11 +20,11 @@ public class TransactionServiceApp implements TransactionService {
             }
         } else {
             auditService.logAction(player.getUsername()," transaction: " + transactionId,false);
-            throw new TransactionException("Транзакция не может быть произведена");
+            throw new TransactionException("Недостаточно средств для перевода");
         }
         return true;
     }
-    public boolean credit(Player player, long amount, String transactionId) {  //toDo тупит при вводе номера транзакции
+    public boolean credit(Player player, long amount, String transactionId) {
         if(amount >0) {
             if(!player.getTransactionHistory().contains(transactionId)){
                 player.setBalance(player.getBalance()+amount);
@@ -36,7 +36,7 @@ public class TransactionServiceApp implements TransactionService {
             }
         } else {
             auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
-            throw new TransactionException("Транзакция не может быть произведена");
+            throw new TransactionException("Введите ссумму больше 0");
         }
         return true;
     }
