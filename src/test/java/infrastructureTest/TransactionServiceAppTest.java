@@ -28,6 +28,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
         transactionServiceApp.debit(player,70,transactionId);
         int balance = (int) player.getBalance();
         Assertions.assertEquals(30,balance);
+        transactionServiceApp.debit(player,10,"223");
+        Assertions.assertEquals(20,player.getBalance());
 //        Mockito.doReturn(auditService.logAction(player.getUsername()," транзакция 111", true))
 //                .when(transactionServiceApp).debit(player,70,"111");
     //    Mockito.doReturn(true).when(player).addTransactionToHistory(transactionId);
