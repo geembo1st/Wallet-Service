@@ -4,11 +4,26 @@ import domen.User;
 
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * The type Admin action.
+ */
 public class AdminAction implements Action {
     private PlayerRepository playerRepository;
     private AuditService auditService;
     private Admin admin;
+    /**
+     * The Scanner.
+     */
     Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Instantiates a new Admin action.
+     *
+     * @param admin            the admin
+     * @param playerRepository the player repository
+     * @param auditService     the audit service
+     */
     public AdminAction(Admin admin, PlayerRepository playerRepository, AuditService auditService) {
         this.playerRepository = playerRepository;
         this.auditService = auditService;

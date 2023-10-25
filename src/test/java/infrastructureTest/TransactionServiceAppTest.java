@@ -1,5 +1,4 @@
 package infrastructureTest;
-
 import domen.Player;
 import infrastructure.*;
 import org.junit.jupiter.api.Assertions;
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-
 @ExtendWith(MockitoExtension.class)
     class TransactionServiceAppTest {
     @InjectMocks
@@ -18,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
     private PlayerRepository playerRepository;
     @Mock
     private AuditService auditService;
-
     private static Player player = new Player("root", "root".toCharArray());
     @Test
      void debitShouldReturnTrue() {
@@ -29,8 +25,5 @@ import org.mockito.junit.jupiter.MockitoExtension;
         Assertions.assertEquals(30,balance);
         transactionServiceApp.debit(player,10,"223");
         Assertions.assertEquals(20,player.getBalance());
-//        Mockito.doReturn(auditService.logAction(player.getUsername()," транзакция 111", true))
-//                .when(transactionServiceApp).debit(player,70,"111");
-    //    Mockito.doReturn(true).when(player).addTransactionToHistory(transactionId);
     }
 }

@@ -1,10 +1,19 @@
 package infrastructure;
 import domen.Player;
 import exception.TransactionException;
-import lombok.EqualsAndHashCode;
+/**
+ * The type Transaction service app.
+ */
 public class TransactionServiceApp implements TransactionService {
     private PlayerRepository playerRepository;
     private AuditService auditService;
+
+    /**
+     * Instantiates a new Transaction service app.
+     *
+     * @param playerRepository the player repository
+     * @param auditService     the audit service
+     */
     public TransactionServiceApp(PlayerRepository playerRepository, AuditService auditService) {
         this.playerRepository=playerRepository;
         this.auditService=auditService;

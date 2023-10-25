@@ -5,11 +5,25 @@ import exception.AuthenticateException;
 import exception.RegisterException;
 
 import java.util.*;
+
+/**
+ * The type Player repository app.
+ */
 public class PlayerRepositoryApp implements PlayerRepository {
+    /**
+     * The Scanner.
+     */
     Scanner scanner = new Scanner(System.in);
     private Admin admin;
     private Map<String, User> playerMap;
     private AuditService auditService;
+
+    /**
+     * Instantiates a new Player repository app.
+     *
+     * @param auditService the audit service
+     * @param admin        the admin
+     */
     public PlayerRepositoryApp(AuditService auditService, Admin admin) {
         this.admin=admin;
         this.playerMap = new HashMap<>();

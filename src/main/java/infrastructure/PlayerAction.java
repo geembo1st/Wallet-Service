@@ -1,10 +1,24 @@
 package infrastructure;
 import domen.Player;
 import java.util.Scanner;
+
+/**
+ * The type Player action.
+ */
 public class PlayerAction implements Action {
+    /**
+     * The Scanner.
+     */
     Scanner scanner = new Scanner(System.in);
     private TransactionService transactionService;
     private Player player;
+
+    /**
+     * Instantiates a new Player action.
+     *
+     * @param player             the player
+     * @param transactionService the transaction service
+     */
     public PlayerAction(Player player, TransactionService transactionService) {
         this.player = player;
         this.transactionService = transactionService;
