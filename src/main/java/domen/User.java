@@ -1,6 +1,5 @@
 package domen;
 import lombok.Getter;
-
 /**
  * The type User.
  */

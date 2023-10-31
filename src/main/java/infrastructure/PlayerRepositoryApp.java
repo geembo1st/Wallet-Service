@@ -3,6 +3,7 @@ import domen.Admin;
 import domen.User;
 import exception.AuthenticateException;
 import exception.RegisterException;
+import lombok.Setter;
 
 import java.util.*;
 
@@ -10,10 +11,6 @@ import java.util.*;
  * The type Player repository app.
  */
 public class PlayerRepositoryApp implements PlayerRepository {
-    /**
-     * The Scanner.
-     */
-    Scanner scanner = new Scanner(System.in);
     private Admin admin;
     private Map<String, User> playerMap;
     private AuditService auditService;
@@ -52,7 +49,7 @@ public class PlayerRepositoryApp implements PlayerRepository {
             return user;
         } else {
             auditService.logAction(userName," аутентификация ", false);
-            throw new AuthenticateException("Аутентификация не удалась");
+            throw new AuthenticateException("Аутентификация не удалась, не найден пользователь");
         }
     }
     @Override
