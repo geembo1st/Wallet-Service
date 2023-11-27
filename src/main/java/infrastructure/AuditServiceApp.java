@@ -1,5 +1,4 @@
 package infrastructure;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +19,6 @@ public class AuditServiceApp implements AuditService {
         String logEntry = username + " - " + action + " - " + (success ? "SUCCESS" : "FAIL");
         auditLog.add(logEntry);
     }
-
-    /**
-     * Gets audit log.
-     */
     public void getAuditLog() {
         System.out.println("Audit Log:");
         for (String entry : auditLog) {

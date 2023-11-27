@@ -1,28 +1,24 @@
 package domen;
-
+import lombok.Getter;
+/**
+ * The type User.
+ */
+@Getter
 public abstract class User {
+    /**
+     * The Username.
+     */
     protected String username;
+    /**
+     * The Password.
+     */
     protected char[] password;
+    /**
+     * The Is admin.
+     */
     protected boolean isAdmin;
-
-    public boolean isAdmin() {
-        return isAdmin;
+    @Override
+    public String toString() {
+        return username + (isAdmin ? " (Admin)" : "");
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(char[] password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public char[] getPassword() {
-        return password;
-    }
-
 }

@@ -13,5 +13,8 @@ public interface AuditService {
     */
    void logAction(String username, String action, boolean success);
 
+   /**
+    * Gets audit log.
+    */
    void getAuditLog();
 }

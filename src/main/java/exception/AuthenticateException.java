@@ -1,8 +1,14 @@
 package exception;
 
+/**
+ * The type Authenticate exception.
+ */
 public class AuthenticateException extends RuntimeException {
-    private static String message = "Аутентификация не удалась ";
-
-    public AuthenticateException() {super(message);
+    /**
+     * Instantiates a new Authenticate exception.
+     *
+     * @param message the message
+     */
+    public AuthenticateException(String message) {super(message);
     }
 }

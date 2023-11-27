@@ -1,9 +1,14 @@
 package exception;
 
+/**
+ * The type Register exception.
+ */
 public class RegisterException extends RuntimeException {
-    private static String message = "Пользователь с таким логином уже существует";
-
-    public RegisterException() {super(message);
+    /**
+     * Instantiates a new Register exception.
+     *
+     * @param message the message
+     */
+    public RegisterException(String message) {super(message);
     }
-
 }

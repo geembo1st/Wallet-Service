@@ -1,5 +1,4 @@
 package infrastructure;
-
 import domen.User;
 
 import java.util.List;
@@ -9,20 +8,27 @@ import java.util.List;
  */
 public interface PlayerRepository {
     /**
-     * Register user.
+     * Register player.
      *
+     * @param user the user
      * @throws Exception the exception
      */
     void registerPlayer(User user) throws Exception;
 
     /**
-     * Authenticate user player.
+     * Authenticate player user.
      *
-     * @param password   the password
-     * @return the player
+     * @param userName the user name
+     * @param password the password
+     * @return the user
      * @throws Exception the exception
      */
     User authenticatePlayer(String userName, char [] password) throws Exception;
 
+    /**
+     * Gets players.
+     *
+     * @return the players
+     */
     List<User> getPlayers();
 }
