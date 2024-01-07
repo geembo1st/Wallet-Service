@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
     private static Player player;
     @BeforeEach
     void prepaire() {
-    player = new Player("root", "root".toCharArray());}
+    player = new Player();}
     @Test
      void debitShouldReturnTrue() {
         player.setBalance(100);

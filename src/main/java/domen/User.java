@@ -1,9 +1,12 @@
 package domen;
 import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The type User.
  */
 @Getter
+//@Setter
 public abstract class User {
     /**
      * The Username.

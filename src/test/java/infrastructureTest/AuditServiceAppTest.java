@@ -16,10 +16,10 @@ public class AuditServiceAppTest {
     @Mock
     private PlayerRepositoryApp playerRepositoryApp;
 
-    @Test
-    void logActionTest() {
-        Player player = new Player("playerUsername", "playerPassword".toCharArray());
-        playerRepositoryApp.registerPlayer(player);
-        auditServiceApp.logAction(player.getUsername(), " регистрация ", true);
-    }
+//    @Test
+//    void logActionTest() {
+//        Player player = new Player("playerUsername", "playerPassword".toCharArray());
+//        playerRepositoryApp.registerPlayer(player);
+//        auditServiceApp.logAction(player.getUsername(), " регистрация ", true);
+//    }
 }

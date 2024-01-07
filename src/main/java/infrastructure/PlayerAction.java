@@ -1,6 +1,7 @@
 package infrastructure;
 import domen.Player;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * The type Player action.
@@ -48,11 +49,11 @@ public class PlayerAction implements Action {
                         System.out.println("Транзакция произведена");
                     }
                     break;
-                case (3):
-                    player.getTransactionHistory().forEach((transactionID, amount) -> System.out.println("Transaction: " + transactionID + "\n amount: " + amount));
-                    break;
+//                case (3):
+//                    player.getTransactionHistory().forEach((transactionID, amount) -> System.out.println("Transaction: " + transactionID + "\n amount: " + amount));
+//                    break;
                 case (4):
-                    long balance = player.getBalance();
+                    int balance = player.getBalance();
                     System.out.println(balance);
                     break;
                 case (5):
