@@ -8,13 +8,8 @@ import java.util.List;
  * The interface Player repository.
  */
 public interface PlayerRepository {
-    /**
-     * Register player.
-     *
-     * @param player the player
-     * @throws Exception the exception
-     */
-    void registerPlayer(Player player) throws Exception;
+
+    void registerPlayer(User user) throws Exception;
 
     /**
      * Authenticate player user.
@@ -31,5 +26,8 @@ public interface PlayerRepository {
      *
      * @return the players
      */
-    List<User> getPlayers();
+    List<String> getPlayers();
+
+    void deletePlayer(Player player) throws Exception;
+    User nameChange(Player player,String newUsername) throws Exception;
 }

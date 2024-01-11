@@ -1,7 +1,5 @@
 package infrastructure;
 import domen.Admin;
-import domen.User;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,18 +10,9 @@ public class AdminAction implements Action {
     private PlayerRepository playerRepository;
     private AuditService auditService;
     private Admin admin;
-    /**
-     * The Scanner.
-     */
+
     Scanner scanner = new Scanner(System.in);
 
-    /**
-     * Instantiates a new Admin action.
-     *
-     * @param admin            the admin
-     * @param playerRepository the player repository
-     * @param auditService     the audit service
-     */
     public AdminAction(Admin admin, PlayerRepository playerRepository, AuditService auditService) {
         this.playerRepository = playerRepository;
         this.auditService = auditService;
@@ -40,7 +29,7 @@ public class AdminAction implements Action {
                     auditService.getAuditLog();
                     break;
                 case (2):
-                    List<User> playerList = playerRepository.getPlayers();
+                    List<String> playerList = playerRepository.getPlayers();
                     playerList.forEach(player -> System.out.println(player.toString()));
                     break;
                 case (3):

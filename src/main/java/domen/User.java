@@ -6,7 +6,7 @@ import lombok.Setter;
  * The type User.
  */
 @Getter
-//@Setter
+@Setter
 public abstract class User {
     /**
      * The Username.

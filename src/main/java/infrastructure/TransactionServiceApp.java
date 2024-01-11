@@ -1,6 +1,11 @@
 package infrastructure;
 import domen.Player;
+import domen.TransactionHistory;
 import exception.TransactionException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 /**
  * The type Transaction service app.
  */
@@ -19,35 +24,57 @@ public class TransactionServiceApp implements TransactionService {
         this.auditService=auditService;
     }
     public boolean debit(Player player, int amount, String transactionId) {
-//        if(player.getBalance()>=amount) {
-//            if(!player.getTransactionHistory().containsKey(transactionId)){
-//                player.setBalance(player.getBalance()-amount);
-//                player.addTransactionToHistory(transactionId,amount);
-//                auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
-//            } else {
-//                auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
-//                throw new TransactionException("Номер транзакции существует");
-//            }
-//        } else {
-//            auditService.logAction(player.getUsername()," transaction: " + transactionId,false);
-//            throw new TransactionException("Недостаточно средств для перевода");
-//        }
+        TransactionHistory transaction = new TransactionHistory(transactionId);
+        if(player.getBalance()>=amount) {
+            Configuration configuration = new Configuration().addAnnotatedClass(Player.class)
+                    .addAnnotatedClass(TransactionHistory.class);
+            SessionFactory sessionFactory = configuration.buildSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            if(!player.getTransactionsName().contains(transaction.getTransaction_name())){
+            try {
+                session.beginTransaction();
+                Player playerAfterTransaction = session.get(Player.class, player.getId());
+                playerAfterTransaction.setBalance(player.getBalance()-amount);
+                auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
+                player.addTransactionToHistory(transaction);
+            } finally {
+                sessionFactory.close();
+            }
+            } else {
+                auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
+                throw new TransactionException("Номер транзакции существует");
+            }
+        } else {
+            auditService.logAction(player.getUsername()," transaction: " + transactionId,false);
+            throw new TransactionException("Недостаточно средств для перевода");
+        }
         return true;
     }
     public boolean credit(Player player, int amount, String transactionId) {
-//        if(amount >0) {
-//            if(!player.getTransactionHistory().containsKey(transactionId)){
-//                player.setBalance(player.getBalance()+amount);
-//                player.addTransactionToHistory(transactionId,amount);
-//                auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
-//            } else {
-//                auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
-//                throw new TransactionException("Номер транзакции существует");
-//            }
-//        } else {
-//            auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
-//            throw new TransactionException("Введите ссумму больше 0");
-//        }
+            TransactionHistory transaction = new TransactionHistory(transactionId);
+            if(amount >0) {
+                Configuration configuration = new Configuration().addAnnotatedClass(Player.class)
+                        .addAnnotatedClass(TransactionHistory.class);
+                SessionFactory sessionFactory = configuration.buildSessionFactory();
+                Session session = sessionFactory.getCurrentSession();
+                if(!player.getTransactionsName().contains(transaction.getTransaction_name())){
+                    try {
+                        session.beginTransaction();
+                        Player playerAfterTransaction = session.get(Player.class, player.getId());
+                        playerAfterTransaction.setBalance(player.getBalance()+amount);
+                        auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
+                        player.addTransactionToHistory(transaction);
+                    } finally {
+                        sessionFactory.close();
+                    }
+                } else {
+                    auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
+                    throw new TransactionException("Номер транзакции существует");
+                }
+            } else {
+            auditService.logAction(player.getUsername()," транзакция: " + transactionId,false);
+            throw new TransactionException("Введите ссумму больше 0");
+        }
         return true;
     }
 }

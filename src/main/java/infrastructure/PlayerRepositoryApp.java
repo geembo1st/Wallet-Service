@@ -1,115 +1,137 @@
 package infrastructure;
 import domen.Admin;
 import domen.Player;
+import domen.TransactionHistory;
 import domen.User;
 import exception.AuthenticateException;
 import exception.RegisterException;
-import lombok.Setter;
-
-import java.sql.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import java.util.*;
 
 public class PlayerRepositoryApp implements PlayerRepository {
     private Admin admin;
     private AuditService auditService;
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "root";
-    private static Connection connection;
-
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    {
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public PlayerRepositoryApp(AuditService auditService, Admin admin) {
         this.admin = admin;
-//        this.playerMap = new HashMap<>();
-//        this.playerMap.put(admin.getUsername(), admin);
         this.auditService = auditService;
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            session.save(admin);
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+
     }
 
-    public void registerPlayer(Player player) {
-        if (player.getPassword().length < 6) {
+    public void registerPlayer(User user) {
+        if (user.getPassword().length < 6) {
             throw new RegisterException("Пароль должен содержать не менее 6 символов");
         }
-        List<String> names = new ArrayList<>();
+            Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+            SessionFactory sessionFactory = configuration.buildSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM users";
-            ResultSet resultSet = statement.executeQuery(SQL);
-            while (resultSet.next()) {
-                String name = resultSet.getString("username");
-                names.add(name);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            if (names.contains(player.getUsername())) {
-                auditService.logAction(player.getUsername(), " регистрация ", false);
+            session.beginTransaction();
+            List<String> usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
+            if (usernames.contains(user.getUsername())) {
+                auditService.logAction(user.getUsername(), " регистрация ", false);
                 throw new RegisterException("Пользователь с таким логином уже существует");
             } else {
-                auditService.logAction(player.getUsername(), " регистрация ", true);
-                try {
-                    PreparedStatement preparedStatement =
-                            connection.prepareStatement("INSERT INTO users VALUES(?,?,?)");
-                    preparedStatement.setString(0, player.getUsername());
-                    preparedStatement.setString(1, Arrays.toString(player.getPassword()));
-                    preparedStatement.setInt(2, player.getBalance());
-                    preparedStatement.executeUpdate();
-                } catch (SQLException expception) {
-                    expception.printStackTrace();
-                }
+                session.save(user);
                 System.out.println("Регистрация прошла успешно");
+            auditService.logAction(user.getUsername(), " регистрация ", true);}
+                session.getTransaction().commit();
+            } finally {
+                sessionFactory.close();
             }
         }
-    }
-
 
     public User authenticatePlayer(String username, char[] password) {
-//        User user = playerMap.get(userName);
-//        if (user != null && String.valueOf(user.getPassword()).equals(String.valueOf(password)) &&
-//                userName.equals(user.getUsername())) {
-//            System.out.println("Аутентификация пользователя прошла успешно: " + userName);
-//            auditService.logAction(user.getUsername(), " аутентификация ", true);
-//            return user;
-//        } else {
-//            auditService.logAction(userName, " аутентификация ", false);
-//            throw new AuthenticateException("Аутентификация не удалась, не найден пользователь");
-//            return null;
-//        }
-        return null;
-    }
-@Override
-    public List<User> getPlayers() {
-        List<User> players = new ArrayList<>();
+        User user;
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM users";
-            ResultSet resultSet = statement.executeQuery(SQL);
-            while (resultSet.next()) {
-                String name = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                int balance = resultSet.getInt("balance");
-                Player player = new Player();
-             //   Player player = new Player(name, password.toCharArray());
-                players.add(player);
+            session.beginTransaction();
+            Query<Player> query = session.createQuery(
+                    "FROM Player WHERE username = :username AND password = :password", Player.class);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            user = query.uniqueResult();
+            session.getTransaction().commit();
+            if (user != null) {
+                auditService.logAction(user.getUsername(), " аутентификация ", true);
+                System.out.println("Аутентификация пользователя прошла успешно: " + username);
+                return user;
+            } else {
+                auditService.logAction(username, " аутентификация ", false);
+                throw new AuthenticateException("Аутентификация не удалась, не найден пользователь");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } finally {
+            sessionFactory.close();
         }
-        return players;
+    }
+
+    @Override
+    public List<String> getPlayers() {
+        List<String> usernames;
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
+        session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+        return usernames;
+    }
+
+    @Override
+    public void deletePlayer(Player player) throws Exception {
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+                session.delete(player);
+                System.out.println("Удаление пользователя прошло успешно");
+            auditService.logAction(player.getUsername(), " удаление пользователя ", true);
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+    }
+
+    @Override
+    public User nameChange(Player player,String newUsername) throws Exception {
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        Player playerAfterNameChange = session.get(Player.class, player.getId());
+        try {
+            session.beginTransaction();
+            List<String> usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
+            if (usernames.contains(newUsername)) {
+                auditService.logAction(player.getUsername(), " изменение имени ", false);
+                throw new Exception("Пользователь с таким логином уже существует");
+            } else {
+                playerAfterNameChange.setUsername(newUsername);
+                System.out.println("Изменение имени прошло успешно");
+            auditService.logAction(player.getUsername(), " изменение имени ", true);}
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+        return playerAfterNameChange;
     }
 }

@@ -2,7 +2,10 @@ package domen;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,13 +30,29 @@ public class Player extends User {
     private char[] password;
     @Column(name = "balance")
     private int balance;
-    @OneToOne(mappedBy = "player_username")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private Username usernames;
+
     @OneToMany(mappedBy = "owner")
     @Cascade({org.hibernate.annotations.CascadeType.REMOVE,
     org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private List<Transaction_history> transactions;
+
+
+    private List<TransactionHistory> transactions;
+
+
+    public List<String> getTransactionsName() {
+        List<String> transactionsName;
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            transactionsName = session.createQuery("SELECT transaction_name FROM Transaction_history", String.class).getResultList();
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+        return transactionsName;
+    }
 
     public Player(String username, char[] password, int balance) {
         this.username = username;
@@ -41,14 +60,23 @@ public class Player extends User {
         this.balance = balance;
     }
 
- //   private HashMap<String, Integer> transactionHistory = new HashMap<>();
     public Player(){}
 
-    public void addTransactionToHistory(Transaction_history transaction) {
-        if(this.transactions == null) {
-            this.transactions = new ArrayList<>();
-            this.transactions.add(transaction);
-            transaction.setOwner(this);
+    public void addTransactionToHistory(TransactionHistory transaction) {
+////        if(this.transactions == null) {
+////            this.transactions = new ArrayList<>();
+////            this.transactions.add(transaction);
+////            transaction.setOwner(this);
+//        }
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            session.save(transaction);
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
         }
     }
 

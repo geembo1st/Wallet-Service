@@ -12,10 +12,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="8ad4ce8b-a50a-4cb3-b598-12c019622dcc">
-      <console name="postgres" type="STANDARD" schema="public" session="Main"><![CDATA[select * from player;
-select * from username;
-select * from transaction_history;]]></console>
+    <connection id="ddbfe4f5-1d49-4e97-b6c4-e6d58175fd48">
+      <console name="postgres" type="STANDARD" schema="postgres" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -47,7 +45,7 @@ select * from transaction_history;]]></console>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="8ad4ce8b-a50a-4cb3-b598-12c019622dcc" active="true" signed="true">
+      <connection id="ddbfe4f5-1d49-4e97-b6c4-e6d58175fd48" active="true" signed="true">
         <database>
           <name value="postgres" />
           <description value="" />

@@ -9,7 +9,7 @@ public class Admin extends User {
      */
     public Admin() {
         this.username = "admin";
-        this.password = "admin".toCharArray();
+        this.password = "admin1234".toCharArray();
         this.isAdmin = true;
     }
     @Override
