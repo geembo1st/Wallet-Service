@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface PlayerRepository {
 
-    void registerPlayer(User user) throws Exception;
+    void registerPlayer(Player player) throws Exception;
 
     /**
      * Authenticate player user.

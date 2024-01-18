@@ -63,6 +63,7 @@ public class TransactionServiceApp implements TransactionService {
                         Player playerAfterTransaction = session.get(Player.class, player.getId());
                         playerAfterTransaction.setBalance(player.getBalance()+amount);
                         auditService.logAction(player.getUsername()," транзакция: " + transactionId,true);
+                        session.save(transaction);
                         player.addTransactionToHistory(transaction);
                     } finally {
                         sessionFactory.close();

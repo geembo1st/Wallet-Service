@@ -18,21 +18,10 @@ public class PlayerRepositoryApp implements PlayerRepository {
     public PlayerRepositoryApp(AuditService auditService, Admin admin) {
         this.admin = admin;
         this.auditService = auditService;
-        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        try {
-            session.beginTransaction();
-            session.save(admin);
-            session.getTransaction().commit();
-        } finally {
-            sessionFactory.close();
-        }
-
     }
 
-    public void registerPlayer(User user) {
-        if (user.getPassword().length < 6) {
+    public void registerPlayer(Player player) {
+        if (player.getPassword().length < 6) {
             throw new RegisterException("Пароль должен содержать не менее 6 символов");
         }
             Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
@@ -41,13 +30,13 @@ public class PlayerRepositoryApp implements PlayerRepository {
         try {
             session.beginTransaction();
             List<String> usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
-            if (usernames.contains(user.getUsername())) {
-                auditService.logAction(user.getUsername(), " регистрация ", false);
+            if (usernames.contains(player.getUsername())) {
+                auditService.logAction(player.getUsername(), " регистрация ", false);
                 throw new RegisterException("Пользователь с таким логином уже существует");
             } else {
-                session.save(user);
+                session.save(player);
                 System.out.println("Регистрация прошла успешно");
-            auditService.logAction(user.getUsername(), " регистрация ", true);}
+            auditService.logAction(player.getUsername(), " регистрация ", true);}
                 session.getTransaction().commit();
             } finally {
                 sessionFactory.close();
@@ -83,7 +72,7 @@ public class PlayerRepositoryApp implements PlayerRepository {
     @Override
     public List<String> getPlayers() {
         List<String> usernames;
-        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         try {
@@ -98,7 +87,7 @@ public class PlayerRepositoryApp implements PlayerRepository {
 
     @Override
     public void deletePlayer(Player player) throws Exception {
-        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         try {
@@ -114,10 +103,10 @@ public class PlayerRepositoryApp implements PlayerRepository {
 
     @Override
     public User nameChange(Player player,String newUsername) throws Exception {
-        Configuration configuration = new Configuration().addAnnotatedClass(Player.class);
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
-        Player playerAfterNameChange = session.get(Player.class, player.getId());
+        Player playerAfterNameChange;
         try {
             session.beginTransaction();
             List<String> usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
@@ -125,6 +114,7 @@ public class PlayerRepositoryApp implements PlayerRepository {
                 auditService.logAction(player.getUsername(), " изменение имени ", false);
                 throw new Exception("Пользователь с таким логином уже существует");
             } else {
+                 playerAfterNameChange = session.get(Player.class, player.getId());
                 playerAfterNameChange.setUsername(newUsername);
                 System.out.println("Изменение имени прошло успешно");
             auditService.logAction(player.getUsername(), " изменение имени ", true);}
