@@ -95,8 +95,8 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(infrastructure.AuditService,domen.Admin)" class="member-name-link">PlayerRepositoryApp</a><wbr>(<a href="AuditService.html" title="interface in infrastructure">AuditService</a>&nbsp;auditService,
- <a href="../domen/Admin.html" title="class in domen">Admin</a>&nbsp;admin)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(infrastructure.AuditService,domain.Admin)" class="member-name-link">PlayerRepositoryApp</a><wbr>(<a href="AuditService.html" title="interface in infrastructure">AuditService</a>&nbsp;auditService,
+ <a href="../domain/Admin.html" title="class in domain">Admin</a>&nbsp;admin)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Instantiates a new Player repository app.</div>
 </div>
@@ -114,19 +114,19 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../domen/User.html" title="class in domen">User</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../domain/User.html" title="class in domain">User</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#authenticatePlayer(java.lang.String,char%5B%5D)" class="member-name-link">authenticatePlayer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userName,
  char[]&nbsp;password)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Authenticate player user.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domen/User.html" title="class in domen">User</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/User.html" title="class in domain">User</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlayers()" class="member-name-link">getPlayers</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets players.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerPlayer(domen.User)" class="member-name-link">registerPlayer</a><wbr>(<a href="../domen/User.html" title="class in domen">User</a>&nbsp;user)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerPlayer(domain.User)" class="member-name-link">registerPlayer</a><wbr>(<a href="../domain/User.html" title="class in domain">User</a>&nbsp;user)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Register player.</div>
 </div>
@@ -148,10 +148,10 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(infrastructure.AuditService,domen.Admin)">
+<section class="detail" id="&lt;init&gt;(infrastructure.AuditService,domain.Admin)">
 <h3>PlayerRepositoryApp</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerRepositoryApp</span><wbr><span class="parameters">(<a href="AuditService.html" title="interface in infrastructure">AuditService</a>&nbsp;auditService,
- <a href="../domen/Admin.html" title="class in domen">Admin</a>&nbsp;admin)</span></div>
+ <a href="../domain/Admin.html" title="class in domain">Admin</a>&nbsp;admin)</span></div>
 <div class="block">Instantiates a new Player repository app.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -169,14 +169,14 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="registerPlayer(domen.User)">
+<section class="detail" id="registerPlayer(domain.User)">
 <h3>registerPlayer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">registerPlayer</span><wbr><span class="parameters">(<a href="../domen/User.html" title="class in domen">User</a>&nbsp;user)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PlayerRepository.html#registerPlayer(domen.User)">PlayerRepository</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">registerPlayer</span><wbr><span class="parameters">(<a href="../domain/User.html" title="class in domain">User</a>&nbsp;user)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PlayerRepository.html#registerPlayer(domain.User)">PlayerRepository</a></code></span></div>
 <div class="block">Register player.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PlayerRepository.html#registerPlayer(domen.User)">registerPlayer</a></code>&nbsp;in interface&nbsp;<code><a href="PlayerRepository.html" title="interface in infrastructure">PlayerRepository</a></code></dd>
+<dd><code><a href="PlayerRepository.html#registerPlayer(domain.User)">registerPlayer</a></code>&nbsp;in interface&nbsp;<code><a href="PlayerRepository.html" title="interface in infrastructure">PlayerRepository</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>user</code> - the user</dd>
 </dl>
@@ -185,7 +185,7 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <li>
 <section class="detail" id="authenticatePlayer(java.lang.String,char[])">
 <h3>authenticatePlayer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../domen/User.html" title="class in domen">User</a></span>&nbsp;<span class="element-name">authenticatePlayer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userName,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../domain/User.html" title="class in domain">User</a></span>&nbsp;<span class="element-name">authenticatePlayer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userName,
  char[]&nbsp;password)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PlayerRepository.html#authenticatePlayer(java.lang.String,char%5B%5D)">PlayerRepository</a></code></span></div>
 <div class="block">Authenticate player user.</div>
@@ -203,7 +203,7 @@ implements <a href="PlayerRepository.html" title="interface in infrastructure">P
 <li>
 <section class="detail" id="getPlayers()">
 <h3>getPlayers</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domen/User.html" title="class in domen">User</a>&gt;</span>&nbsp;<span class="element-name">getPlayers</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/User.html" title="class in domain">User</a>&gt;</span>&nbsp;<span class="element-name">getPlayers</span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PlayerRepository.html#getPlayers()">PlayerRepository</a></code></span></div>
 <div class="block">Gets players.</div>
 <dl class="notes">

@@ -1,9 +1,7 @@
 package infrastructureTest;
 
-import domen.Player;
 import infrastructure.AuditServiceApp;
 import infrastructure.PlayerRepositoryApp;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Spy;

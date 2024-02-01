@@ -1,6 +1,6 @@
 package infrastructure;
-import domen.Player;
-import domen.User;
+import domain.Player;
+import domain.User;
 
 import java.util.List;
 
@@ -30,4 +30,6 @@ public interface PlayerRepository {
 
     void deletePlayer(Player player) throws Exception;
     User nameChange(Player player,String newUsername) throws Exception;
+
+    long getBalance(long playerId) throws Exception;
 }

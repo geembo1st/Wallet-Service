@@ -1,5 +1,5 @@
 package infrastructureTest;
-import domen.Player;
+import domain.Player;
 import exception.TransactionException;
 import infrastructure.*;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
     void prepaire() {
     player = new Player();}
     @Test
-     void debitShouldReturnTrue() {
+     void debitShouldReturnTrue() throws Exception {
         player.setBalance(100);
         transactionServiceApp.debit(player,70,"firstTransaction");
         int balance = (int) player.getBalance();

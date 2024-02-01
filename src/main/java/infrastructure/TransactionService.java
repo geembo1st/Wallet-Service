@@ -1,5 +1,5 @@
 package infrastructure;
-import domen.Player;
+import domain.Player;
 
 /**
  * The interface Transaction service.
@@ -13,7 +13,7 @@ public interface TransactionService {
      * @param transactionId the transaction id
      * @return the boolean
      */
-    boolean debit(Player player, int amount, String transactionId);
+    boolean debit(Player player, long amount, String transactionId) throws Exception;
 
     /**
      * Credit boolean.
@@ -23,5 +23,5 @@ public interface TransactionService {
      * @param transactionId the transaction id
      * @return the boolean
      */
-    boolean credit(Player player, int amount, String transactionId);
+    boolean credit(Player player, long amount, String transactionId);
 }

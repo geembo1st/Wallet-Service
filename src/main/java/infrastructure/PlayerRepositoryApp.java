@@ -1,8 +1,8 @@
 package infrastructure;
-import domen.Admin;
-import domen.Player;
-import domen.TransactionHistory;
-import domen.User;
+import domain.Admin;
+import domain.Player;
+import domain.TransactionHistory;
+import domain.User;
 import exception.AuthenticateException;
 import exception.RegisterException;
 import org.hibernate.Session;
@@ -102,11 +102,29 @@ public class PlayerRepositoryApp implements PlayerRepository {
     }
 
     @Override
+    public long getBalance(long playerId) {
+        Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        long balance;
+        try {
+            session.beginTransaction();
+            balance = session.get(Player.class, playerId).getBalance();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            sessionFactory.close();
+        }
+        return balance;
+    }
+
+    @Override
     public User nameChange(Player player,String newUsername) throws Exception {
         Configuration configuration = new Configuration().addAnnotatedClass(Player.class).addAnnotatedClass(TransactionHistory.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
-        Player playerAfterNameChange;
         try {
             session.beginTransaction();
             List<String> usernames = session.createQuery("SELECT username FROM Player", String.class).getResultList();
@@ -114,14 +132,14 @@ public class PlayerRepositoryApp implements PlayerRepository {
                 auditService.logAction(player.getUsername(), " изменение имени ", false);
                 throw new Exception("Пользователь с таким логином уже существует");
             } else {
-                 playerAfterNameChange = session.get(Player.class, player.getId());
-                playerAfterNameChange.setUsername(newUsername);
+                 player = session.get(Player.class, player.getId());
+                player.setUsername(newUsername);
                 System.out.println("Изменение имени прошло успешно");
             auditService.logAction(player.getUsername(), " изменение имени ", true);}
             session.getTransaction().commit();
         } finally {
             sessionFactory.close();
         }
-        return playerAfterNameChange;
+        return player;
     }
 }

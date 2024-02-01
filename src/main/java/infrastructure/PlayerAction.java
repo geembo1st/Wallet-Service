@@ -1,6 +1,6 @@
 package infrastructure;
-import domen.Player;
-import domen.TransactionHistory;
+import domain.Player;
+import domain.TransactionHistory;
 
 import java.util.Scanner;
 
@@ -31,7 +31,7 @@ public class PlayerAction implements Action {
     }
     public void action() throws Exception {
         int action;
-        do {
+        actions: while (true) {
             System.out.println("\nВыберите действие:\n\t1)Снятие средств\n\t2)Кредит\n\t" +
                     "3)Просмотр истории пополнения/снятия средств\n\t4)Узнать баланс\n\t5)Изменить имя\n\t" +
                     "6)Удалить профиль\n\t7)Выйти в меню");
@@ -56,12 +56,10 @@ public class PlayerAction implements Action {
                     }
                     break;
                 case (3):
-                    for(TransactionHistory transactions: player.getTransactions()) {
-                        System.out.println(transactions.toString());
-                    }
+                        player.getTransactionsName(player.getId());
                     break;
                 case (4):
-                    int balance = player.getBalance();
+                    long balance = playerRepository.getBalance(player.getId());
                     System.out.println(balance);
                     break;
                 case (5):
@@ -71,12 +69,12 @@ public class PlayerAction implements Action {
                     break;
                 case (6):
                     playerRepository.deletePlayer(player);
-                    break;
+                    break actions;
                 case (7):
-                    break;
+                    break actions;
                 default:
                     System.out.println("Неверное значение, введите еще раз");
             }
-        } while (action != 7);
+        };
     }
 }

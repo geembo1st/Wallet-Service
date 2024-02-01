@@ -13,7 +13,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ddbfe4f5-1d49-4e97-b6c4-e6d58175fd48">
-      <console name="postgres" type="STANDARD" schema="public" session="Main"><![CDATA[select * from player;]]></console>
+      <console name="postgres" type="STANDARD" schema="public" session="Main"><![CDATA[select * from transactionhistory;
+select * from player;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

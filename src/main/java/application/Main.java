@@ -1,13 +1,12 @@
 package application;
 
-import domen.Admin;
-import domen.Player;
-import domen.TransactionHistory;
-import domen.User;
+import domain.Admin;
+import domain.Player;
+import domain.TransactionHistory;
+import domain.User;
+import exception.AuthenticateException;
+import exception.RegisterException;
 import infrastructure.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.util.Scanner;
 
@@ -32,7 +31,6 @@ public class Main {
         TransactionHistory transactionHistory = new TransactionHistory();
         int action;
         do {
-          //  playerRepositoryApp.registerPlayer(admin);
             System.out.println("\nВыберите действие:\n\t1)регистрация\n\t2)вход\n\t3)зайти под администратором\n\t4)Выйти");
             action = Integer.parseInt(scanner.nextLine());
             switch (action) {
@@ -70,7 +68,11 @@ public class Main {
                     String adminPassword = scanner.nextLine();
                     try {
                         playerRepositoryApp.authenticatePlayer(adminName, String.valueOf(adminPassword).toCharArray());
-                        adminAction.action();
+                        if (adminName.equals("admin") && adminPassword.equals("admin1234")) {
+                            adminAction.action();
+                        } else {
+                            throw new AuthenticateException("Аутентификация не удалась, не найден пользователь");
+                        }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -81,6 +83,8 @@ public class Main {
                     System.out.println("Неверное значение, введите еще раз");
             }
         } while (action != 4);
+
+
     }
 }
 

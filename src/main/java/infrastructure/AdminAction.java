@@ -1,5 +1,5 @@
 package infrastructure;
-import domen.Admin;
+import domain.Admin;
 import java.util.List;
 import java.util.Scanner;
 
