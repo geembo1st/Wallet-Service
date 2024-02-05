@@ -5,7 +5,6 @@ import domain.Player;
 import domain.TransactionHistory;
 import domain.User;
 import exception.AuthenticateException;
-import exception.RegisterException;
 import infrastructure.*;
 
 import java.util.Scanner;
